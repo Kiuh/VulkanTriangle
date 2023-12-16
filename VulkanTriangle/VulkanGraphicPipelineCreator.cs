@@ -13,10 +13,10 @@ internal static unsafe class VulkanGraphicPipelineCreator
     )
     {
         byte[] vertShaderCode = File.ReadAllBytes(
-            "D:\\Projects С#\\VulkanTriangle\\Shaders\\vert.spv"
+            "D:\\GitHub\\VulkanTriangle\\VulkanTriangle\\Shaders\\vert.spv"
         );
         byte[] fragShaderCode = File.ReadAllBytes(
-            "D:\\Projects С#\\VulkanTriangle\\Shaders\\frag.spv"
+            "D:\\GitHub\\VulkanTriangle\\VulkanTriangle\\Shaders\\frag.spv"
         );
 
         ShaderModule vertShaderModule = CreateShaderModule(vk, device, vertShaderCode);

@@ -14,7 +14,7 @@ namespace VulkanTriangle;
 internal struct Vertex
 {
     public Vector2D<float> pos;
-    public Vector3D<float> color;
+    public Vector4D<float> color;
 
     public static VertexInputBindingDescription GetBindingDescription()
     {
@@ -30,7 +30,7 @@ internal struct Vertex
 
     public static VertexInputAttributeDescription[] GetAttributeDescriptions()
     {
-        VertexInputAttributeDescription[] attributeDescriptions =
+        return
         [
             new VertexInputAttributeDescription()
             {
@@ -43,12 +43,10 @@ internal struct Vertex
             {
                 Binding = 0,
                 Location = 1,
-                Format = Format.R32G32B32Sfloat,
+                Format = Format.R32G32B32A32Sfloat,
                 Offset = (uint)Marshal.OffsetOf<Vertex>(nameof(color)),
             }
         ];
-
-        return attributeDescriptions;
     }
 }
 
@@ -103,10 +101,10 @@ internal unsafe class VulkanTriangleApplication
 
     private readonly Vertex[] vertices =
     [
-        new() { pos = new Vector2D<float>(-0.5f,-0.5f), color = new Vector3D<float>(1.0f, 0.0f, 0.0f) },
-        new() { pos = new Vector2D<float>(0.5f,-0.5f), color = new Vector3D<float>(0.0f, 1.0f, 0.0f) },
-        new() { pos = new Vector2D<float>(0.5f,0.5f), color = new Vector3D<float>(0.0f, 0.0f, 1.0f) },
-        new() { pos = new Vector2D<float>(-0.5f,0.5f), color = new Vector3D<float>(1.0f, 1.0f, 1.0f) },
+        new() { pos = new Vector2D<float>(-0.5f,-0.5f), color = new Vector4D<float>(10.0f, 0.0f, 0.0f, 10.0f) },
+        new() { pos = new Vector2D<float>(0.5f,-0.5f), color = new Vector4D<float>(0.0f, 1.0f, 0.0f, 1.0f) },
+        new() { pos = new Vector2D<float>(0.5f,0.5f), color = new Vector4D<float>(0.0f, 0.0f, 0.0f, 1.0f) },
+        new() { pos = new Vector2D<float>(-0.5f,0.5f), color = new Vector4D<float>(1.0f, 1.0f, 1.0f, 0.0f) },
     ];
 
     private readonly ushort[] indices =
@@ -314,8 +312,8 @@ internal unsafe class VulkanTriangleApplication
     {
         CleanUpSwapChain();
 
-        vk!.DestroyBuffer(device, vertexBuffer, null);
-        vk!.FreeMemory(device, vertexBufferMemory, null);
+        vk!.DestroyBuffer(device, indexBuffer, null);
+        vk!.FreeMemory(device, indexBufferMemory, null);
 
         vk!.DestroyBuffer(device, vertexBuffer, null);
         vk!.FreeMemory(device, vertexBufferMemory, null);

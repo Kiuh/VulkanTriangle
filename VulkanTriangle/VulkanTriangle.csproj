@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,5 +14,9 @@
     <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" Version="2.20.0" />
     <PackageReference Include="Spectre.Console" Version="0.48.0" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo ProjectDir: $(ProjectDir)&#xD;&#xA;call ShaderBuild.bat" />
+  </Target>
 
 </Project>
